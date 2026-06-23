@@ -1,33 +1,8 @@
 import { defineConfig } from 'vite'
-import path from 'path'
-import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    // Stub out Figma Make virtual modules so standalone builds succeed
-    {
-      name: 'figma-stubs',
-      resolveId(id) {
-        if (id === 'figma:foundry-client-api') return id
-        if (id.startsWith('figma:asset/')) return id
-      },
-      load(id) {
-        if (id === 'figma:foundry-client-api') return 'export default {}'
-        if (id.startsWith('figma:asset/')) return `export default ''`
-      },
-    },
-  ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
-  assetsInclude: ['**/*.svg', '**/*.csv'],
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
+  plugins: [react()],
+  base: '/test/', // 이 부분을 추가해야 깃허브 페이지가 올바른 경로로 파일을 읽어옵니다!
 })
