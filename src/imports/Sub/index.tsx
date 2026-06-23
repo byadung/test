@@ -265,8 +265,15 @@ function Component4() {
   return (
     <div className="absolute h-[1080px] left-0 top-[-472px] w-[1920px]" data-name="영상배경">
       <div className="absolute h-[1080px] left-0 top-[110px] w-[1920px]" data-name="ta01150003593_1080p 1">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 size-full object-cover"
+          src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+        />
         <div aria-hidden className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 object-cover" />
           <div className="absolute bg-[#00523e] inset-0 mix-blend-soft-light" />
         </div>
       </div>
