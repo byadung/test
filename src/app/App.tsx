@@ -1,20 +1,30 @@
 import { useState } from "react";
 import Sub1 from "../imports/Sub1/index";
 import Sub2 from "../imports/Sub2/index";
+import Sub3 from "../imports/Sub3/index";
+import Sub4 from "../imports/Sub4/index";
+import Sub5 from "../imports/Sub5/index";
+
+type Page = "sub1" | "sub2" | "sub3" | "sub4" | "sub5";
+
+const pages: Record<Page, React.ComponentType<{ onNavigate?: (page: string) => void }>> = {
+  sub1: Sub1,
+  sub2: Sub2,
+  sub3: Sub3,
+  sub4: Sub4,
+  sub5: Sub5,
+};
 
 export default function App() {
-  const [activePage, setActivePage] = useState<"인사말" | "약력">("인사말");
+  const [activePage, setActivePage] = useState<Page>("sub1");
 
-  const handleTabChange = (tab: string) => {
-    if (tab === "인사말" || tab === "약력") {
-      setActivePage(tab);
+  const handleNavigate = (page: string) => {
+    if (page in pages) {
+      setActivePage(page as Page);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  return activePage === "인사말" ? (
-    <Sub1 onTabChange={handleTabChange} />
-  ) : (
-    <Sub2 onTabChange={handleTabChange} />
-  );
+  const PageComponent = pages[activePage];
+  return <PageComponent onNavigate={handleNavigate} />;
 }

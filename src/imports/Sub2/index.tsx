@@ -103,13 +103,13 @@ function Component2() {
   );
 }
 
-function Component3() {
+function Component3({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <div className="content-stretch flex flex-[1_0_0] gap-[80px] items-start justify-end min-w-px relative" data-name="메뉴">
-      <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="메뉴">
+      <div onClick={() => onNavigate?.('sub1')} className="content-stretch flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity duration-200" data-name="메뉴">
         <p className="[word-break:break-word] font-['Pretendard_GOV:SemiBold',sans-serif] leading-[normal] not-italic relative shrink-0 text-[#24264b] text-[22px] whitespace-nowrap">김중남입니다.</p>
       </div>
-      <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="메뉴">
+      <div onClick={() => onNavigate?.('sub4')} className="content-stretch flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity duration-200" data-name="메뉴">
         <p className="[word-break:break-word] font-['Pretendard_GOV:SemiBold',sans-serif] leading-[normal] not-italic relative shrink-0 text-[#24264b] text-[22px] whitespace-nowrap">공약과 실천</p>
       </div>
       <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="메뉴">
@@ -134,11 +134,11 @@ function Btn() {
   );
 }
 
-function Frame() {
+function Frame({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <div className="content-stretch flex gap-[80px] items-center relative shrink-0 w-[1530px]">
       <Component2 />
-      <Component3 />
+      <Component3 onNavigate={onNavigate} />
       <Btn />
     </div>
   );
@@ -153,10 +153,10 @@ function Frame7() {
   );
 }
 
-function Frame5({ onTabChange }: { onTabChange?: (tab: string) => void }) {
+function Frame5({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   return (
     <div
-      onClick={() => onTabChange?.('인사말')}
+      onClick={() => onNavigate?.('sub1')}
       className="bg-white content-stretch flex items-center justify-center px-[30px] py-[16px] relative rounded-[100px] shrink-0 cursor-pointer transition-all duration-200 hover:bg-[#32a94c] hover:drop-shadow-[8px_8px_10px_rgba(78,86,104,0.25)] group"
     >
       <p className="[word-break:break-word] font-['Pretendard:Medium',sans-serif] leading-[1.2] not-italic relative shrink-0 text-[#24264b] text-[20px] whitespace-nowrap transition-colors duration-200 group-hover:text-white">인사말</p>
@@ -172,34 +172,34 @@ function Frame4() {
   );
 }
 
-function Frame6() {
+function Frame6({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
-    <div className="bg-white content-stretch flex items-center justify-center px-[30px] py-[16px] relative rounded-[100px] shrink-0 cursor-pointer transition-all duration-200 hover:bg-[#32a94c] hover:drop-shadow-[8px_8px_10px_rgba(78,86,104,0.25)] group">
+    <div onClick={() => onNavigate?.('sub3')} className="bg-white content-stretch flex items-center justify-center px-[30px] py-[16px] relative rounded-[100px] shrink-0 cursor-pointer transition-all duration-200 hover:bg-[#32a94c] hover:drop-shadow-[8px_8px_10px_rgba(78,86,104,0.25)] group">
       <p className="[word-break:break-word] font-['Pretendard:Medium',sans-serif] leading-[1.2] not-italic relative shrink-0 text-[#24264b] text-[20px] whitespace-nowrap transition-colors duration-200 group-hover:text-white">말과 글</p>
     </div>
   );
 }
 
-function Frame2({ onTabChange }: { onTabChange?: (tab: string) => void }) {
+function Frame2({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   return (
     <div className="content-stretch flex gap-[10px] items-center justify-center relative shrink-0 w-[1560px]">
-      <Frame5 onTabChange={onTabChange} />
+      <Frame5 onNavigate={onNavigate} />
       <Frame4 />
-      <Frame6 />
+      <Frame6 onNavigate={onNavigate} />
     </div>
   );
 }
 
-function Frame1({ onTabChange }: { onTabChange?: (tab: string) => void }) {
+function Frame1({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[50px] items-center overflow-clip pb-[70px] pt-[90px] relative shrink-0 w-[1560px]">
       <Frame7 />
-      <Frame2 onTabChange={onTabChange} />
+      <Frame2 onNavigate={onNavigate} />
     </div>
   );
 }
 
-function Header({ onTabChange }: { onTabChange?: (tab: string) => void }) {
+function Header({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0 w-full" data-name="header">
       <div className="absolute h-[685px] left-0 overflow-clip top-0 w-[1920px]" style={{ backgroundImage: "linear-gradient(rgb(255, 255, 255) 24.628%, rgba(255, 255, 255, 0) 57.287%), linear-gradient(90deg, rgb(242, 245, 244) 0%, rgb(242, 245, 244) 100%), linear-gradient(90deg, rgb(249, 242, 237) 0%, rgb(249, 242, 237) 100%)" }} data-name="bg">
@@ -253,9 +253,9 @@ function Header({ onTabChange }: { onTabChange?: (tab: string) => void }) {
       </div>
       <div className="content-stretch flex flex-col items-center relative shrink-0 w-[1880px]" data-name="gnb">
         <Component />
-        <Frame />
+        <Frame onNavigate={onNavigate} />
       </div>
-      <Frame1 onTabChange={onTabChange} />
+      <Frame1 onNavigate={onNavigate} />
     </div>
   );
 }
@@ -568,10 +568,10 @@ function FixedCon() {
   );
 }
 
-export default function Sub({ onTabChange }: { onTabChange?: (tab: string) => void }) {
+export default function Sub({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   return (
     <div className="bg-white content-stretch flex flex-col items-start relative size-full" data-name="sub_2">
-      <Header onTabChange={onTabChange} />
+      <Header onNavigate={onNavigate} />
       <Body />
       <div className="bg-[#696974] content-stretch flex flex-col items-center overflow-clip py-[80px] relative shrink-0 w-full" data-name="footer">
         <FixedCon />
